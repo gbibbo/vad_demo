@@ -1,0 +1,32 @@
+# Core dependencies for VAD Demo
+# Audio processing
+librosa>=0.8.0
+soundfile>=0.10.3
+PyAudio>=0.2.11
+
+# Deep learning frameworks
+torch>=1.7.0
+torchlibrosa==0.0.4
+transformers>=4.20.0
+
+# Scientific computing
+numpy>=1.19.0
+scipy>=1.5.0
+numba>=0.45
+
+# Visualization
+matplotlib>=3.3.0
+Pillow>=8.4.0
+
+# Configuration and utilities
+omegaconf>=2.1.1
+
+# VAD-specific models
+silero-vad>=4.0.0
+webrtcvad-wheels>=2.0.10
+
+# ONNX runtime (for efficient inference)
+onnxruntime>=1.10.0
+
+# Additional audio processing
+torchaudio>=0.8.0

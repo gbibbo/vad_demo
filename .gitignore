@@ -1,0 +1,94 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+vad_env/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Model files (downloaded automatically)
+*.pth
+*.pt
+*.onnx
+*.h5
+*.pkl
+models/epanns/E-PANNs/models/
+models/panns/
+Cnn9_GMP_64x64_300000_iterations_mAP=0.37.pth
+
+# Audio files and outputs
+*.wav
+*.mp3
+*.m4a
+*.flac
+*.aac
+vad_*.json
+vad_*.wav
+
+# Temporary and cache files
+*.tmp
+*.temp
+.cache/
+*.log
+
+# Version artifacts
+=*
+
+# Test files and experimental scripts
+test_*.py
+main_dual_*.py
+*_allOK.py
+*_working.py
+*_not_working.py
+*_con_delay.py
+*_con_histeresis.py
+*_sin_histeresis.py
+*_dropdown_working.py
+speech_detection_panns.py
+
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
