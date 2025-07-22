@@ -2,7 +2,6 @@
 echo 🎤 VAD Demo - Windows Installation
 echo =================================
 
-REM Check if Python is installed
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo ❌ Python not found. Please install Python 3.8+ from https://python.org
@@ -33,5 +32,5 @@ python download_models.py
 
 echo 🎉 Installation complete!
 echo.
-echo To run the application, use: run_app.bat
+echo To run the application in PowerShell, use: .\run_app.bat
 pause
