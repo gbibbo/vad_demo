@@ -11,8 +11,6 @@ echo 🔌 Activating virtual environment...
 call vad_env\Scripts\activate.bat
 
 echo 🎵 IMPORTANT: Grant microphone permissions when prompted!
-echo If you don't see permission dialog, check Windows Privacy Settings:
-echo Settings ^> Privacy ^& Security ^> Microphone ^> Allow apps to access microphone
 echo.
 
 echo 🚀 Launching application...

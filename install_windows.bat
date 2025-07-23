@@ -25,7 +25,7 @@ pipwin install pyaudio
 
 echo 📚 Installing Python packages...
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-pip install -r requirements.txt
+pip install webrtcvad-wheels silero-vad librosa soundfile matplotlib numpy scipy numba transformers omegaconf Pillow torchlibrosa onnxruntime
 
 echo 📥 Downloading models...
 python download_models.py
