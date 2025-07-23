@@ -11,7 +11,7 @@ A real-time speech detection and removal framework for privacy-preserving audio 
 
 ## 🎯 Overview
 
-This demonstration provides a comprehensive speech removal framework designed to identify and remove personal information (speech) from domestic audio recordings while preserving other environmental sounds. Our tool addresses privacy concerns in smart home applications and public audio datasets by offering real-time speech detection with multiple AI models.
+This demonstration provides a speech removal framework designed to identify and remove personal information (speech) from domestic audio recordings while preserving other environmental sounds. Our tool addresses privacy concerns in smart home applications and public audio datasets by offering real-time speech detection with multiple AI models.
 
 ### Key Features
 
@@ -25,7 +25,7 @@ This demonstration provides a comprehensive speech removal framework designed to
 - **📊 Live Visualization**: Dual mel-spectrogram displays with probability curves
 - **⚡ Dynamic Delay Calibration**: Automatic model-specific processing delay correction
 - **🔒 Privacy-Preserving Export**: Save original audio or speech-removed versions
-- **��️ Interactive Controls**: Adjustable detection thresholds and model comparison
+- **🕹️ Interactive Controls**: Adjustable detection thresholds and model comparison
 
 ### Performance Benchmarks
 
