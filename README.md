@@ -9,6 +9,12 @@ A real-time speech detection and removal framework for privacy-preserving audio 
 
 ![Speech Detection Demo](assets/demo_screenshot.png)
 
+### Try the demo in your browser
+
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-md.svg)](https://huggingface.co/spaces/gbibbo/vad_demo)
+
+> Alternatively, you can use the version hosted at **Hugging Face Spaces**: https://huggingface.co/spaces/gbibbo/vad_demo
+
 ## 🎯 Overview
 
 This demonstration provides a speech removal framework designed to identify and remove personal information (speech) from domestic audio recordings while preserving other environmental sounds. Our tool addresses privacy concerns in smart home applications and public audio datasets by offering real-time speech detection with multiple AI models.
