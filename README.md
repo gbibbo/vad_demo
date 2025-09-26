@@ -3,7 +3,7 @@
 [![Demo](https://img.shields.io/badge/Demo-Live-brightgreen)](https://github.com/gbibbo/vad_demo)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://python.org)
-[![Paper](https://img.shields.io/badge/Paper-WASPAA%202025-red.svg)](https://ieeexplore.ieee.org/abstract/document/)
+[![Paper](https://img.shields.io/badge/Paper-WASPAA%202025-red.svg)](https://zenodo.org/records/17050321)
 
 A real-time speech detection and removal framework for privacy-preserving audio recordings, featuring multiple state-of-the-art AI models with interactive visualization.
 
