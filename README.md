@@ -103,8 +103,8 @@ This tool supports research in:
 ```bibtex
 @inproceedings{bibbo2025speech,
   title={Speech Removal Framework for Privacy-Preserving Audio Recordings},
-  author={[Authors omitted for review]},
-  booktitle={2025 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)},
+  author={[Gabriel Bibbó, Arshdeep Singh, Thomas Deacon, Mark D. Plumbley]},
+  booktitle={Demo paper, IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)},
   year={2025},
   organization={IEEE}
 }
