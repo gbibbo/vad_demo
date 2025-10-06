@@ -175,16 +175,16 @@ class SpeechDetectionApp:
 
     def _setup_gui(self):
         self.fig = plt.figure(figsize=(14, 10)); self.fig.patch.set_facecolor('white')
-        self.fig.suptitle("Real‑Time Speech Visualizer", fontsize=18, fontweight='bold', y=0.98)
+        self.fig.suptitle("Real‑Time Speech Visualizer", fontsize=18, fontweight='bold', y=0.89)
         self.fig.subplots_adjust(left=0.07, right=0.93, bottom=0.15, top=0.95, hspace=0.3)
-        self._add_logo(r'sed_demo/assets/ai4s_banner.png', (0.2, 0.95), 0.15); self._add_logo(r'sed_demo/assets/surrey_logo.png', (0.50, 0.95), 0.023); self._add_logo(r'sed_demo/assets/EPSRC_logo.png',  (0.683, 0.95), 0.10); self._add_logo(r'sed_demo/assets/CVSSP_logo.png',  (0.88, 0.945), 0.14)
+        self._add_logo(r'sed_demo/assets/ai4s_banner.png', (0.2, 0.95), 0.11); self._add_logo(r'sed_demo/assets/surrey_logo.png', (0.47, 0.95), 0.108); self._add_logo(r'sed_demo/assets/EPSRC_logo.png',  (0.675, 0.95), 0.10); self._add_logo(r'sed_demo/assets/CVSSP_logo.png',  (0.88, 0.945), 0.14)
         
-        self.ax_pann  = self.fig.add_axes([0.16, 0.57, 0.72, 0.24]); self.im_pann  = self.ax_pann.imshow(self.spec_data, aspect='auto', origin='lower', cmap='viridis', vmin=self.spec_vmin, vmax=self.spec_vmax, interpolation='bilinear', extent=[0, self.display_duration, 0, self.display_n_mels])
+        self.ax_pann  = self.fig.add_axes([0.16, 0.57, 0.72, 0.24]); self.im_pann  = self.ax_pann.imshow(self.spec_data, aspect='auto', origin='lower', cmap='gray', vmin=self.spec_vmin, vmax=self.spec_vmax, interpolation='bilinear', extent=[0, self.display_duration, 0, self.display_n_mels])
         self.ax_pann.set_title('PANNs'); self.ax_pann.set_ylabel('Frequency (Hz)'); plt.setp(self.ax_pann.get_xticklabels(), visible=False)
         self.ax_pann_prob = self.ax_pann.twinx(); self.ax_pann_prob.set_ylim(0, 1); self.ax_pann_prob.set_ylabel('Prob.', color='cyan'); self.ax_pann_prob.tick_params(axis='y', colors='cyan')
         (self.line_pann_prob,) = self.ax_pann_prob.plot([], [], color='cyan', lw=1.5, alpha=.7); self.threshold_line_pann = self.ax_pann_prob.axhline(y=0.5, color='cyan', lw=1, ls=':', alpha=.9)
 
-        self.ax_epann = self.fig.add_axes([0.16, 0.24, 0.72, 0.24]); self.im_epann = self.ax_epann.imshow(self.spec_data_ep, aspect='auto', origin='lower', cmap='viridis', vmin=self.spec_vmin, vmax=self.spec_vmax, interpolation='bilinear', extent=[0, self.display_duration, 0, self.display_n_mels])
+        self.ax_epann = self.fig.add_axes([0.16, 0.24, 0.72, 0.24]); self.im_epann = self.ax_epann.imshow(self.spec_data_ep, aspect='auto', origin='lower', cmap='gray', vmin=self.spec_vmin, vmax=self.spec_vmax, interpolation='bilinear', extent=[0, self.display_duration, 0, self.display_n_mels])
         self.ax_epann.set_title('E-PANNs'); self.ax_epann.set_xlabel('Time (seconds)')
         self.ax_epann_prob = self.ax_epann.twinx(); self.ax_epann_prob.set_ylim(0, 1); self.ax_epann_prob.set_yticks([]); self.ax_epann_prob.tick_params(axis='y', colors='orange')
         (self.line_epann_prob,) = self.ax_epann_prob.plot([], [], color='orange', lw=1.5, alpha=.7); self.threshold_line_ep = self.ax_epann_prob.axhline(y=0.5, color='orange', lw=1, ls=':', alpha=.9)
@@ -209,7 +209,7 @@ class SpeechDetectionApp:
         self.ax_controls = self.fig.add_axes([0.07, 0.02, 0.9, 0.12]); self.ax_controls.set_facecolor('white'); self.ax_controls.axis('off')
         self.status_text = self.ax_controls.text(0.01, 0.8, 'Status: Ready', fontsize=12, transform=self.ax_controls.transAxes)
         
-        state_y = [0.65, 0.50, 0.35, 0.20, 0.05] 
+        state_y = [0.65, 0.5, 0.35, 0.20, 0.05] 
         self.pann_status_text   = self.ax_controls.text(0.01, state_y[0], 'PANNs: INACTIVE',  fontsize=12, color='red', transform=self.ax_controls.transAxes)
         self.epann_status_text  = self.ax_controls.text(0.01, state_y[1], 'E-PANNs: INACTIVE', fontsize=12, color='red', transform=self.ax_controls.transAxes)
         self.ast_status_text    = self.ax_controls.text(0.01, state_y[2], 'AST: INACTIVE',     fontsize=12, color='red', transform=self.ax_controls.transAxes)
@@ -218,22 +218,32 @@ class SpeechDetectionApp:
         self.status_labels = {"PANNs": self.pann_status_text, "E-PANNs": self.epann_status_text, "AST": self.ast_status_text, "Silero": self.silero_status_text, "WebRTC": self.webrtc_status_text}
         for lbl in self.status_labels.values(): lbl.set_visible(False)
         
-        self.prob_text = self.ax_controls.text(0.25, 0.92, 'P:0|EP:0|AST:0|S:0|W:0', fontsize=10, transform=self.ax_controls.transAxes)
+        self.prob_text = self.ax_controls.text(0.25, 1.22, 'P:0|EP:0|AST:0|S:0|W:0', fontsize=10, transform=self.ax_controls.transAxes)
         self.prob_text.set_zorder(5)
         
-        self.threshold_slider = Slider(self.fig.add_axes([0.35, 0.08, 0.3, 0.03]), 'Threshold', 0.0, 1.0, valinit=0.5, valfmt='%.2f', color='cyan'); self.threshold_slider.label.set_color('black')
+        self.threshold_slider = Slider(self.fig.add_axes([0.25, 0.115, 0.35, 0.025]), 'Threshold', 0.0, 1.0, valinit=0.5, valfmt='%.2f', color='cyan'); self.threshold_slider.label.set_color('black')
         self.threshold_slider.on_changed(self._on_threshold_change)
-        self._on_threshold_change(self.threshold_slider.val) 
-        
-        self.start_stop_btn = Button(self.fig.add_axes([0.7, 0.07, 0.1, 0.04]), 'Start', color='green'); self.exit_btn = Button(self.fig.add_axes([0.85, 0.07, 0.1, 0.04]), 'Exit', color='red'); self.delay_btn = Button(self.fig.add_axes([0.57, 0.11, 0.1, 0.04]), 'Delay CORR: OFF', color='gray');
-        self.delay_btn.ax.set_zorder(10) 
+        self._on_threshold_change(self.threshold_slider.val)
+
+        self.start_stop_btn = Button(self.fig.add_axes([0.765, 0.055, 0.095, 0.04]), 'Start', color='green'); self.exit_btn = Button(self.fig.add_axes([0.875, 0.055, 0.095, 0.04]), 'Exit', color='red'); self.delay_btn = Button(self.fig.add_axes([0.67, 0.11, 0.12, 0.035]), 'Delay CORR: OFF', color='gray');
+        self.delay_btn.ax.set_zorder(10)
         self.start_stop_btn.on_clicked(self._toggle_recording); self.exit_btn.on_clicked(self._exit_app); self.delay_btn.on_clicked(self._toggle_delay_corr)
-        
-        # Botones de guardado
-        self.save_btn = Button(self.fig.add_axes([0.28, 0.03, 0.12, 0.04]), 'Save full audio', color='skyblue')
-        self.save_btn.on_clicked(self._save_snapshot)
-        self.save_removed_btn = Button(self.fig.add_axes([0.43, 0.03, 0.15, 0.04]), 'Save speech removed', color='plum')
-        self.save_removed_btn.on_clicked(self._save_snapshot_speech_removed)
+
+        # Botones de guardado - Primera fila (Modelo A)
+        self.save_btn_A = Button(self.fig.add_axes([0.27, 0.07, 0.13, 0.035]), f'Save full audio {self.selected_model_A}', color='skyblue')
+        self.save_btn_A.label.set_fontsize(7.5)
+        self.save_btn_A.on_clicked(self._save_snapshot_model_A)
+        self.save_removed_btn_A = Button(self.fig.add_axes([0.415, 0.07, 0.16, 0.035]), f'Save speech removed {self.selected_model_A}', color='plum')
+        self.save_removed_btn_A.label.set_fontsize(7.5)
+        self.save_removed_btn_A.on_clicked(self._save_snapshot_speech_removed_model_A)
+
+        # Botones de guardado - Segunda fila (Modelo B)
+        self.save_btn_B = Button(self.fig.add_axes([0.27, 0.025, 0.13, 0.035]), f'Save full audio {self.selected_model_B}', color='skyblue')
+        self.save_btn_B.label.set_fontsize(7.5)
+        self.save_btn_B.on_clicked(self._save_snapshot_model_B)
+        self.save_removed_btn_B = Button(self.fig.add_axes([0.415, 0.025, 0.16, 0.035]), f'Save speech removed {self.selected_model_B}', color='plum')
+        self.save_removed_btn_B.label.set_fontsize(7.5)
+        self.save_removed_btn_B.on_clicked(self._save_snapshot_speech_removed_model_B)
 
         print("✓ GUI ready")
 
@@ -431,14 +441,20 @@ class SpeechDetectionApp:
     def _choose_model(self, label, is_A):
         rad, current = (self.rad_A, self.selected_model_A) if is_A else (self.rad_B, self.selected_model_B)
         if label in self.disabled_models: rad.set_active(self.model_options.index(current)); return
-        
+
         for name, lbl in self.status_labels.items(): lbl.set_visible(False)
-        
-        if is_A: 
+
+        if is_A:
             self.selected_model_A = label; self.ax_pann.set_title(label); self.btn_head_A.label.set_text(f'{label}  ▼'); self._toggle_menu_A()
-        else: 
+            # Actualizar nombres de botones de guardado para Modelo A
+            self.save_btn_A.label.set_text(f'Save full audio {label}')
+            self.save_removed_btn_A.label.set_text(f'Save speech removed {label}')
+        else:
             self.selected_model_B = label; self.ax_epann.set_title(label); self.btn_head_B.label.set_text(f'{label}  ▼'); self._toggle_menu_B()
-        
+            # Actualizar nombres de botones de guardado para Modelo B
+            self.save_btn_B.label.set_text(f'Save full audio{label}')
+            self.save_removed_btn_B.label.set_text(f'Save speech removed {label}')
+
         if label != 'NONE': self.status_labels[label].set_visible(True); self.status_labels[label].set_text(f'{label}: INACTIVE'); self.status_labels[label].set_color('red')
         self._clear_markers(); self._update_plot(None); self.fig.canvas.draw_idle()
 
@@ -450,12 +466,13 @@ class SpeechDetectionApp:
         if self.selected_model_B not in ('NONE', self.selected_model_A): data[self.selected_model_B] = to_pairs(ev.get(self.selected_model_B, []))
         with open(path, 'w', encoding='utf-8') as f: json.dump(data, f, indent=2)
 
-    def _save_snapshot(self, _event=None):
+    def _save_snapshot_model_A(self, _event=None):
         audio = np.asarray(self.snap_buffer, dtype=np.float32)
         if not audio.size: print("⚠️ Nada que guardar."); return
         ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        wav_name = f"vad_{ts}.wav"
-        json_name = f"vad_{ts}.json"
+        model_name = self.selected_model_A.replace('-', '')
+        wav_name = f"full_{model_name}_{ts}.wav"
+        json_name = f"full_{model_name}_{ts}.json"
         audio_i16 = (np.clip(audio, -1, 1) * 32767).astype('<i2')
         with wave.open(wav_name, 'wb') as wf:
             wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(self.samplerate)
@@ -463,7 +480,7 @@ class SpeechDetectionApp:
         self._dump_annotations(json_name)
         print(f"✓ Guardado {wav_name} y {json_name}")
 
-    def _save_snapshot_speech_removed(self, _evt=None):
+    def _save_snapshot_speech_removed_model_A(self, _evt=None):
         audio = np.asarray(self.snap_buffer, dtype=np.float32).copy()
         if not audio.size: print("⚠️ Nada que guardar."); return
         t0 = self.time_cursor - 10.0
@@ -474,8 +491,44 @@ class SpeechDetectionApp:
             i1 = max(0, int((off_t - t0) * self.samplerate))
             audio[i0:i1] = 0.0
         ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        wav_name = f"vad_{ts}_removed.wav"
-        json_name = f"vad_{ts}.json"
+        model_name = self.selected_model_A.replace('-', '')
+        wav_name = f"anon_{model_name}_{ts}.wav"
+        json_name = f"anon_{model_name}_{ts}.json"
+        audio_i16 = (np.clip(audio, -1, 1) * 32767).astype('<i2')
+        with wave.open(wav_name, 'wb') as wf:
+            wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(self.samplerate)
+            wf.writeframes(audio_i16.tobytes())
+        self._dump_annotations(json_name)
+        print(f"✓ Guardado {wav_name} y {json_name} (speech removido)")
+
+    def _save_snapshot_model_B(self, _event=None):
+        audio = np.asarray(self.snap_buffer, dtype=np.float32)
+        if not audio.size: print("⚠️ Nada que guardar."); return
+        ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        model_name = self.selected_model_B.replace('-', '')
+        wav_name = f"full_{model_name}_{ts}.wav"
+        json_name = f"full_{model_name}_{ts}.json"
+        audio_i16 = (np.clip(audio, -1, 1) * 32767).astype('<i2')
+        with wave.open(wav_name, 'wb') as wf:
+            wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(self.samplerate)
+            wf.writeframes(audio_i16.tobytes())
+        self._dump_annotations(json_name)
+        print(f"✓ Guardado {wav_name} y {json_name}")
+
+    def _save_snapshot_speech_removed_model_B(self, _evt=None):
+        audio = np.asarray(self.snap_buffer, dtype=np.float32).copy()
+        if not audio.size: print("⚠️ Nada que guardar."); return
+        t0 = self.time_cursor - 10.0
+        ev = {"PANNs": self.event_tuples, "E-PANNs": self.event_tuples_ep, "AST": self.event_tuples_ast, "Silero": self.event_tuples_silero, "WebRTC": self.event_tuples_webrtc}[self.selected_model_B]
+        pairs = [(on[1], off[1]) for on, off in zip(ev[::2], ev[1::2])]
+        for on_t, off_t in pairs:
+            i0 = max(0, int((on_t  - t0) * self.samplerate))
+            i1 = max(0, int((off_t - t0) * self.samplerate))
+            audio[i0:i1] = 0.0
+        ts = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+        model_name = self.selected_model_B.replace('-', '')
+        wav_name = f"anon_{model_name}_{ts}.wav"
+        json_name = f"anon_{model_name}_{ts}.json"
         audio_i16 = (np.clip(audio, -1, 1) * 32767).astype('<i2')
         with wave.open(wav_name, 'wb') as wf:
             wf.setnchannels(1); wf.setsampwidth(2); wf.setframerate(self.samplerate)
