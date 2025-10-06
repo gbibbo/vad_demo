@@ -7,7 +7,7 @@
 
 A real-time speech detection and removal framework for privacy-preserving audio recordings, featuring multiple state-of-the-art AI models with interactive visualization.
 
-![Speech Detection Demo](assets/demo_screenshot.png)
+![Speech Detection Demo](assets/Rdemo_screenshot.png)
 
 ### Try the demo in your browser
 
@@ -103,7 +103,7 @@ This tool supports research in:
 ```bibtex
 @inproceedings{bibbo2025speech,
   title={Speech Removal Framework for Privacy-Preserving Audio Recordings},
-  author={[Authors omitted for review]},
+  author={Bibb{\'o}, Gabriel and Singh, Arshdeep and Deacon, Thomas and Plumbley, Mark D},
   booktitle={2025 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)},
   year={2025},
   organization={IEEE}
